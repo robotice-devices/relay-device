@@ -2,31 +2,44 @@
 
 import argparse
 
-p = argparse.ArgumentParser(description="Parse command arameters.")
+p = argparse.ArgumentParser(description="Parse command parameters.")
 
 p.add_argument("-p", "--port")
 p.add_argument("-a", "--arch")
-p.add_argument("-m", "--mode", help="for rpi model GPIO.BCM == expander; GPIO.BOARD")
+p.add_argument("-m", "--mode")
 
 opts = p.parse_args()
 
-if opts.arch == "armv7l":
-import Adafruit_BBIO.ADC as ADC
-ADC.setup()
-reading = ADC.read(int(opts.port))
-if opts.arch == "armv6l":
-import RPi.GPIO as GPIO
-if opts.mode == 'GPIO.BCM':
-GPIO.setmode(GPIO.BCM)
+mode = opts.mode
+arch - opts.arch
+
+if arch == 'armv6l' and opts.port.startswith('BMC'):
+    bmc = True
+    port = opts.port.replace('BMC', ''))
 else:
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(int(opts.port), GPIO.IN)
-reading = GPIO.input(int(opts.port))
-if str(reading) == "0":
-reading = 1
+    bmc = False
+    port = opts.port
+
+if arch == "armv7l":
+
+    import Adafruit_BBIO.GPIO as GPIO
+     
+elif arch == "armv6l":
+
+    import RPi.GPIO as GPIO
+
+    if bmc:
+        GPIO.setmode(GPIO.BCM)
+    else:
+        GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(port, GPIO.OUT)
+
+if mode == 'on':
+    GPIO.output(port, GPIO.HIGH)
 else:
-reading = 0	
-GPIO.cleanup()
+    GPIO.output(port, GPIO.LOW)
+
 
 print reading
 exit(0)
