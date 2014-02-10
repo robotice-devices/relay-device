@@ -46,6 +46,6 @@ if mode == 'on':
 else:
     GPIO.output(port, GPIO.LOW)
 
+print "Setting port %s %s" % (port, mode)
 
-print reading
 exit(0)
