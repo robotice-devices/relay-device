@@ -64,6 +64,4 @@ else:
 
 print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
 
-GPIO.cleanup()
-
 exit(0)
