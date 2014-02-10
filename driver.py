@@ -11,7 +11,7 @@ p.add_argument("-m", "--mode")
 opts = p.parse_args()
 
 mode = opts.mode
-arch - opts.arch
+arch = opts.arch
 
 if arch == 'armv6l' and opts.port.startswith('BMC'):
     bmc = True
