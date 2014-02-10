@@ -7,11 +7,21 @@ p = argparse.ArgumentParser(description="Parse command parameters.")
 p.add_argument("-p", "--port")
 p.add_argument("-a", "--arch")
 p.add_argument("-m", "--mode")
+p.add_argument("-r", "--reverse")
 
 opts = p.parse_args()
 
-mode = opts.mode
 arch = opts.arch
+
+if opts.mode == 'on':
+	mode = True
+else:
+	mode =False
+
+if opts.reverse == 'on':
+	reverse = True
+else:
+	reverse =False
 
 if arch == 'armv6l':
     if opts.port.lower().startswith('bmc'):
@@ -41,11 +51,16 @@ elif arch == "armv6l":
 
 GPIO.setup(port, GPIO.OUT)
 
-if mode == 'on':
+if reverse:
+	mode = !mode
+
+if mode:
     GPIO.output(port, GPIO.HIGH)
 else:
     GPIO.output(port, GPIO.LOW)
 
-print "Setting port %s %s" % (port, mode)
+print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
+
+GPIO.cleanup()
 
 exit(0)
