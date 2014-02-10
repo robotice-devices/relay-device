@@ -58,9 +58,9 @@ if reverse:
         mode = True
 
 if mode:
-    GPIO.output(port, GPIO.HIGH)
-else:
     GPIO.output(port, GPIO.LOW)
+else:
+    GPIO.output(port, GPIO.HIGH)
 
 print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
 
