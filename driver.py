@@ -13,11 +13,17 @@ opts = p.parse_args()
 mode = opts.mode
 arch = opts.arch
 
-if arch == 'armv6l' and opts.port.startswith('BMC'):
-    bmc = True
-    port = opts.port.replace('BMC', '')
+if arch == 'armv6l':
+	if opts.port.lower().startswith('bmc'):
+      bmc = True
+      port = opts.port.lower().replace('bmc', '')
+    else:
+      bmc = False
+      port = opts.port
+
+    port = int(port)
+
 else:
-    bmc = False
     port = opts.port
 
 if arch == "armv7l":
