@@ -7,13 +7,12 @@ Controls relay module with GPIO pins
 
 ### BeagleBone - turn on relay at GPIO pin 44
 
-    #python ./driver.py -a armv7l -p 44 -m on
+    python driver.py -a armv7l -p 44 -m on
 
-### Raspberry Pi - turn on relay at GPIO pin 4
+### Raspberry Pi - turn off relay at GPIO #4 on board
 
-    #python ./driver.py -a armv7l -p 44 -m off
+    python driver.py -a armv6l -p 4 -m off
 
+### Raspberry Pi - turn on relay at GPIO #4 on expansion board
 
-## Read more
-
-*
+    python driver.py -a armv6l -p BMC18 -m on -r on
