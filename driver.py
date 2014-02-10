@@ -14,14 +14,14 @@ opts = p.parse_args()
 arch = opts.arch
 
 if opts.mode == 'on':
-	mode = True
+    mode = True
 else:
-	mode =False
+    mode = False
 
 if opts.reverse == 'on':
-	reverse = True
+    reverse = True
 else:
-	reverse =False
+    reverse = False
 
 if arch == 'armv6l':
     if opts.port.lower().startswith('bmc'):
@@ -52,7 +52,10 @@ elif arch == "armv6l":
 GPIO.setup(port, GPIO.OUT)
 
 if reverse:
-	mode = !mode
+    if mode:
+        mode = False
+    else:
+        mode = True
 
 if mode:
     GPIO.output(port, GPIO.HIGH)
