@@ -15,7 +15,7 @@ arch - opts.arch
 
 if arch == 'armv6l' and opts.port.startswith('BMC'):
     bmc = True
-    port = opts.port.replace('BMC', ''))
+    port = opts.port.replace('BMC', '')
 else:
     bmc = False
     port = opts.port
