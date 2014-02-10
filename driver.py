@@ -14,7 +14,7 @@ mode = opts.mode
 arch = opts.arch
 
 if arch == 'armv6l':
-	if opts.port.lower().startswith('bmc'):
+    if opts.port.lower().startswith('bmc'):
       bmc = True
       port = opts.port.lower().replace('bmc', '')
     else:
