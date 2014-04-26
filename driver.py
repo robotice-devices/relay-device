@@ -66,6 +66,10 @@ try:
     print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
 except Exception, e:
     print "Missing GPIO library"
-
+finally:
+    try:
+        GPIO.clean()
+    except Exception, e:
+        pass
 
 exit(0)
