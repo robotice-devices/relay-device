@@ -11,7 +11,17 @@ p.add_argument("-r", "--reverse")
 
 opts = p.parse_args()
 
-arch = opts.arch
+arch = opts.arch #obsolete
+
+try:
+    Adafruit_BBIO.GPIO as GPIO
+except Exception, e:
+    pass
+
+try:
+    import RPi.GPIO as GPIO
+except Exception, e:
+    pass
 
 if opts.mode == 'on':
     mode = True
@@ -23,33 +33,16 @@ if opts.reverse == 'on':
 else:
     reverse = False
 
-if arch == 'armv6l':
-    if opts.port.lower().startswith('bmc'):
-      bmc = True
-      port = opts.port.lower().replace('bmc', '')
-    else:
-      bmc = False
-      port = opts.port
-
-    port = int(port)
-
+if opts.port.lower().startswith('bmc'):
+  bmc = True
+  port = opts.port.lower().replace('bmc', '')
 else:
-    port = opts.port
-
-if arch == "armv7l":
-
-    import Adafruit_BBIO.GPIO as GPIO
-     
-elif arch == "armv6l":
-
-    import RPi.GPIO as GPIO
-
-    if bmc:
-        GPIO.setmode(GPIO.BCM)
-    else:
-        GPIO.setmode(GPIO.BOARD)
-
-GPIO.setup(port, GPIO.OUT)
+  bmc = False
+  port = opts.port
+try:
+    port = int(port)
+except Exception, e:
+    pass
 
 if reverse:
     if mode:
@@ -57,11 +50,22 @@ if reverse:
     else:
         mode = True
 
-if mode:
-    GPIO.output(port, GPIO.HIGH)
-else:
-    GPIO.output(port, GPIO.LOW)
+try:
+    if bmc:
+        GPIO.setmode(GPIO.BCM)
+    else:
+        GPIO.setmode(GPIO.BOARD)
 
-print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
+    GPIO.setup(port, GPIO.OUT)
+
+    if mode:
+        GPIO.output(port, GPIO.HIGH)
+    else:
+        GPIO.output(port, GPIO.LOW)
+
+    print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
+except Exception, e:
+    print "Missing GPIO library"
+
 
 exit(0)
