@@ -14,7 +14,7 @@ opts = p.parse_args()
 arch = opts.arch #obsolete
 
 try:
-    Adafruit_BBIO.GPIO as GPIO
+    import Adafruit_BBIO.GPIO as GPIO
 except Exception, e:
     pass
 
