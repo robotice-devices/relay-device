@@ -68,7 +68,7 @@ except Exception, e:
     print "Missing GPIO library"
 finally:
     try:
-        GPIO.clean()
+        GPIO.cleanup()
     except Exception, e:
         pass
 
