@@ -30,8 +30,10 @@ if device == None:
 
 if opts.mode == 'on':
     mode = True
+    mode_data = '0'
 else:
     mode = False
+    mode_data = '1'
 
 if opts.reverse == 'on':
     reverse = True
@@ -52,10 +54,8 @@ except Exception, e:
 if reverse:
     if mode:
         mode = False
-        model_data = '0'
     else:
         mode = True
-        model_data = '1'
 
 if device == 'rpi':
     if bmc:
@@ -81,9 +81,9 @@ try:
 except:
   saved_data = '-1'
 
-if saved_data != model_data:
+if saved_data != mode_data:
   f = open(status_file, 'w')
-  f.write(model_data)
+  f.write(mode_data)
   f.close()
 
 exit(0)
