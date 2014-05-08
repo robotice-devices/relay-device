@@ -5,23 +5,28 @@ import argparse
 p = argparse.ArgumentParser(description="Parse command parameters.")
 
 p.add_argument("-p", "--port")
-p.add_argument("-a", "--arch")
 p.add_argument("-m", "--mode")
 p.add_argument("-r", "--reverse")
 
 opts = p.parse_args()
 
-arch = opts.arch #obsolete
+device = None
 
 try:
     import Adafruit_BBIO.GPIO as GPIO
+    device = 'bbb'
 except Exception, e:
     pass
 
 try:
     import RPi.GPIO as GPIO
+    device = 'rpi'
 except Exception, e:
     pass
+
+if device == None:
+    print "Missing GPIO library"
+    exit(0)
 
 if opts.mode == 'on':
     mode = True
@@ -50,21 +55,19 @@ if reverse:
     else:
         mode = True
 
-try:
+if device == 'rpi':
     if bmc:
         GPIO.setmode(GPIO.BCM)
     else:
         GPIO.setmode(GPIO.BOARD)
 
-    GPIO.setup(port, GPIO.OUT)
+GPIO.setup(port, GPIO.OUT)
 
-    if mode:
-        GPIO.output(port, GPIO.HIGH)
-    else:
-        GPIO.output(port, GPIO.LOW)
+if mode:
+    GPIO.output(port, GPIO.HIGH)
+else:
+    GPIO.output(port, GPIO.LOW)
 
-    print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
-except Exception, e:
-    print "Missing GPIO library"
+print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
 
 exit(0)
