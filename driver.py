@@ -70,7 +70,7 @@ if mode:
 else:
     GPIO.output(port, GPIO.LOW)
 
-print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
+print "Setting relay at port %s to mode %s, reverse logic: %s" % (port, mode_data, reverse)
 
 status_file = '/tmp/gpio_%s' % port
 
