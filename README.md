@@ -1,27 +1,24 @@
 # Relay module
 
-Controls relay module with GPIO pins
+Controls relay module with GPIO pins, the Adafruit GPIO libraries are needed.
 
 ## Example usage
 
-### BeagleBone - turn on relay at GPIO P8_10
+BeagleBone - turn on relay at GPIO P8_10
+
+    > python driver.py -p P8_10 -m on
 
 
-    python driver.py -a armv7l -p P8_10 -m on
+BeagleBone - turn on reverse-logic relay at GPIO P8_10 
 
-### BeagleBone - turn on reverse-logic relay at GPIO P8_10 
-
-
-    python driver.py -a armv7l -p P8_10 -m on -r on
+    > python driver.py -p P8_10 -m on -r on
 
 
-### Raspberry Pi - turn off relay at GPIO #4 on board
+Raspberry Pi - turn off relay at GPIO #4 on board
+
+    > python driver.py -p 4 -m off
 
 
-    python driver.py -a armv6l -p 4 -m off
+Raspberry Pi - turn on relay at GPIO #18 on expansion board
 
-
-### Raspberry Pi - turn on relay at GPIO #18 on expansion board
-
-
-    python driver.py -a armv6l -p BMC18 -m on -r on
+    > python driver.py -p BMC18 -m on -r on
