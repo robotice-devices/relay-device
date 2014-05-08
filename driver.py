@@ -52,8 +52,10 @@ except Exception, e:
 if reverse:
     if mode:
         mode = False
+        model_data = '0'
     else:
         mode = True
+        model_data = '1'
 
 if device == 'rpi':
     if bmc:
@@ -69,5 +71,19 @@ else:
     GPIO.output(port, GPIO.LOW)
 
 print "Setting port %s to mode %s, reverse logic: %s" % (port, mode, reverse)
+
+status_file = '/tmp/gpio_%s' % port
+
+try:
+  f = open(status_file, 'r')
+  saved_data = f.read()
+  f.close()
+except:
+  pass
+
+if saved_data != model_data:
+  f = open(status_file, 'w')
+  f.write(model_data)
+  f.close()
 
 exit(0)
