@@ -30,10 +30,10 @@ if device == None:
 
 if opts.mode == 'on':
     mode = True
-    mode_data = '0'
+    mode_data = '1'
 else:
     mode = False
-    mode_data = '1'
+    mode_data = '0'
 
 if opts.reverse == 'on':
     reverse = True
