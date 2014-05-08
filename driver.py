@@ -79,7 +79,7 @@ try:
   saved_data = f.read()
   f.close()
 except:
-  pass
+  saved_data = '-1'
 
 if saved_data != model_data:
   f = open(status_file, 'w')
