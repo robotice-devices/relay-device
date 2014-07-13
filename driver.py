@@ -72,18 +72,4 @@ else:
 
 print "Setting relay at port %s to mode %s, reverse logic: %s" % (port, mode_data, reverse)
 
-status_file = '/tmp/gpio_%s' % port
-
-try:
-  f = open(status_file, 'r')
-  saved_data = f.read()
-  f.close()
-except:
-  saved_data = '-1'
-
-if saved_data != mode_data:
-  f = open(status_file, 'w')
-  f.write(mode_data)
-  f.close()
-
 exit(0)
