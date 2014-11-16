@@ -9,7 +9,8 @@ def get_data(sensor):
     f = open(status_file, 'r')
     value = int(f.read())
     f.close()
-  except:
+  except, e:
+    raise e
     value = 0
 
   data = []
