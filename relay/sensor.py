@@ -1,10 +1,9 @@
-
 def get_data(sensor):
   """
   Relay status reading
   """
 
-  status_file = '/tmp/gpio_%s' % sensor.get('port')
+  status_file = '/sys/class/gpio/gpio_%s/value' % sensor.get("gpio", sensor.get('port'))
 
   try:
     f = open(status_file, 'r')
