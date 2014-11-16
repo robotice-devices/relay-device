@@ -8,7 +8,7 @@ logger = logging.getLogger("robotice")
 logger.setLevel(logging.DEBUG)
 
 python = '/srv/robotice/bin/python2'
-executable = 'driver.py'
+executable = '/srv/robotice/drivers/relay/relay/driver.py'
 
 def run(device, model_data, real_data):
 
