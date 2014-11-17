@@ -16,7 +16,7 @@ def get_data(sensor):
   """
   status_file = None
 
-  if not "P" in sensor.get('port'):
+  if not "P" in str(sensor.get('port')):
     status_file = '/sys/class/gpio/gpio%s/value' % sensor.get('port')
   else:
     try:
