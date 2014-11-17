@@ -4,6 +4,15 @@ import time
 import subprocess
 import logging
 
+plain = False
+
+try:
+  sys.path.append("/srv/robotice/service")
+  from robotice.utils import call_command
+except Exception, e:
+  plain = True
+  LOG.debug("Robotice lib not found")
+
 logger = logging.getLogger("robotice")
 logger.setLevel(logging.DEBUG)
 
@@ -28,6 +37,9 @@ def run(device, model_data, real_data):
     else:
       command = [python, executable, '-p', str(device.get('port')), '-m', 'on']
 
-  output = subprocess.check_output(command)
-  
+  if plain is True:
+    output = subprocess.check_output(command)
+  else:
+    output = call_command(command)
+
   return command, output
