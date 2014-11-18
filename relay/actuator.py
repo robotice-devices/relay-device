@@ -6,6 +6,8 @@ import logging
 
 plain = False
 
+LOG = logging.getLogger("robotice")
+
 try:
   sys.path.append("/srv/robotice/service")
   from robotice.utils import call_command
@@ -13,8 +15,6 @@ except Exception, e:
   plain = True
   LOG.debug("Robotice lib not found")
 
-logger = logging.getLogger("robotice")
-logger.setLevel(logging.DEBUG)
 
 python = '/srv/robotice/bin/python2'
 executable = '/srv/robotice/drivers/relay/relay/driver.py'
